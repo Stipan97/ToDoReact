@@ -5,19 +5,23 @@ import { TaskDelete } from "./TaskDelete";
 import { TaskEdit } from "./TaskEdit";
 
 interface AppState {
-    tasks: TaskState
+  tasks: TaskState;
 }
 
 export const TaskList = () => {
-    const { items } = useSelector((state: AppState) => state.tasks)
+  const { items } = useSelector((state: AppState) => state.tasks);
 
-    return (
-        <div>
-            <ul>
-                {items.map((task) => {
-                    return <li key={task.description}>{task.description}<TaskEdit description={task.description}/><TaskDelete description={task.description}/></li>
-                })}
-            </ul>
-        </div>
-    )
-}
+  return (
+    <div>
+      <ul>
+        {items.map((task) => (
+          <li key={task.description}>
+            {task.description}
+            <TaskEdit description={task.description} />
+            <TaskDelete description={task.description} id={task.id} />
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};

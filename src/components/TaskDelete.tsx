@@ -1,22 +1,26 @@
-import React from "react"
+import React from "react";
 import { useDispatch } from "react-redux";
-import { taskActions } from "../actions/actions"
+import { taskActions } from "../actions/actions";
 
 interface TaskDeleteProps {
-    description: string;
+  description: string;
+  id: number;
 }
 
-export const TaskDelete: React.FC<TaskDeleteProps> = ({description}) => {
-    const dispatch = useDispatch();
+export const TaskDelete: React.FC<TaskDeleteProps> = ({ id }) => {
+  const dispatch = useDispatch();
 
+  const onClickDelete = (event: React.MouseEvent<HTMLButtonElement>) => {
+    const { taskId } = event.currentTarget.dataset;
 
-    const onClickDelete = (event: React.MouseEvent<HTMLButtonElement>) => {
-        if(event.currentTarget.dataset.task !== undefined) {
-            dispatch(taskActions.deleteTask(event.currentTarget.dataset.task))
-        }
+    if (taskId) {
+      dispatch(taskActions.deleteTask(parseInt(taskId)));
     }
+  };
 
-    return (
-        <button onClick={onClickDelete} data-task={description}>Delete</button>
-    )
-}
+  return (
+    <button onClick={onClickDelete} data-task-id={id}>
+      Delete
+    </button>
+  );
+};

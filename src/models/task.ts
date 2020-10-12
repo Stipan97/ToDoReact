@@ -1,3 +1,4 @@
 export interface Task {
-    description: string;
+  description: string;
+  id: number;
 }

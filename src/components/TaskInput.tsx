@@ -1,26 +1,36 @@
-import React, { useState } from 'react'
-import { useDispatch } from 'react-redux';
-import { taskActions } from '../actions/actions';
-
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { taskActions } from "../actions/actions";
 
 export const TaskInput = () => {
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-    const [localDescription, setDescription] = useState("")
+  const [localDescription, setDescription] = useState<string>();
 
-    const onChangeUpdateTask = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setDescription(event.target.value)
+  const onChangeUpdateTask = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setDescription(event.target.value);
+  };
+
+  const onClickUpdateTask = () => {
+    if (localDescription) {
+      dispatch(
+        taskActions.addTask({ description: localDescription, id: Date.now() })
+      );
     }
 
-    const onClickUpdateTask = () => {
-        dispatch(taskActions.addTask({ description: localDescription }))
-        setDescription("")
-    }
+    setDescription("");
+  };
 
-    return (
-        <>
-            <input onChange={onChangeUpdateTask} type="text" name="task" placeholder="Input task..." />
-            <button onClick={onClickUpdateTask}>Add Task</button>
-        </>
-    )
-}
+  return (
+    <>
+      <input
+        onChange={onChangeUpdateTask}
+        type="text"
+        name="task"
+        value={localDescription}
+        placeholder="Input task..."
+      />
+      <button onClick={onClickUpdateTask}>Add Task</button>
+    </>
+  );
+};
