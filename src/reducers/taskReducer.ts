@@ -32,10 +32,19 @@ export const taskReducer = (
       };
     }
     case "EDIT_TASK": {
+        //action.payload.id dobar id mi dohvaca
+        const tmpItem = state.items[state.items.indexOf(state.items.filter((task) => task.id === action.payload.id)[0])]
+        state.items[state.items.indexOf(tmpItem)] = {
+            description: action.payload.newDescription,
+            id: action.payload.id
+        }
+        
       return {
         ...state,
         // items: state.items[state.items.indexOf(task)].description =
         //   action.payload.newDescription,
+        // items: state.items[state.items.indexOf(state.items.filter((task) => task.id === action.payload.id)[0])].description = action.payload.newDescription
+        //items: {description: action.payload.newDescription, id: action.payload.id} 
       };
     }
     default:

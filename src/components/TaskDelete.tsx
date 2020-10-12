@@ -3,7 +3,6 @@ import { useDispatch } from "react-redux";
 import { taskActions } from "../actions/actions";
 
 interface TaskDeleteProps {
-  description: string;
   id: number;
 }
 

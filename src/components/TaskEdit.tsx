@@ -3,10 +3,10 @@ import { useDispatch } from "react-redux"
 import { taskActions } from "../actions/actions"
 
 interface TaskEditProps {
-    description: string
+    id: number
 }
 
-export const TaskEdit: React.FC<TaskEditProps> = ({description}) => {
+export const TaskEdit: React.FC<TaskEditProps> = ({id}) => {
     const dispatch = useDispatch()
 
     const [localDescription, setDescription] = useState("")
@@ -16,16 +16,18 @@ export const TaskEdit: React.FC<TaskEditProps> = ({description}) => {
     }
 
     const onClickEditTask = (event: React.MouseEvent<HTMLButtonElement>) => {
-        if(event.currentTarget.dataset.task !== undefined) {
-            dispatch(taskActions.editTask(event.currentTarget.dataset.task, localDescription))
+        const {taskId} = event.currentTarget.dataset
+
+        if(taskId) {
+            dispatch(taskActions.editTask(parseInt(taskId), localDescription))
         }
         setDescription("")
     }
 
     return(
         <>
-            <input onChange={onChangeUpdateEditTask} type="text" name="task" placeholder="Edit task..." />
-            <button onClick={onClickEditTask} data-task={description}>Edit Task</button>
+            <input onChange={onChangeUpdateEditTask} type="text" name="task" value={localDescription} placeholder="Edit task..." />
+            <button onClick={onClickEditTask} data-task-id={id}>Edit Task</button>
         </>
     )
 }

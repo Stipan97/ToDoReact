@@ -20,15 +20,15 @@ const deleteTask = (
 });
 
 const editTask = (
-  oldDescription: string,
+  id: number,
   newDescription: string
 ): ActionWithPayload<
   "EDIT_TASK",
-  { oldDescription: string; newDescription: string }
+  { id: number; newDescription: string }
 > => ({
   type: "EDIT_TASK",
   payload: {
-    oldDescription,
+    id,
     newDescription,
   },
 });
