@@ -41,6 +41,7 @@ export const taskReducer = (state: TaskState = INITIAL_STATE, action: ActionUnio
     }
 }
 
+//ovaj dio mi se ne svida
 function setTmpTask(state: TaskState, description: string): Task {
     let task: Task = {description: ""}
     state.items.forEach(element => {
