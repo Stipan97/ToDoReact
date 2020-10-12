@@ -34,6 +34,7 @@ export const taskReducer = (
     case "EDIT_TASK": {
         //action.payload.id dobar id mi dohvaca
         const tmpItem = state.items[state.items.indexOf(state.items.filter((task) => task.id === action.payload.id)[0])]
+        //jel greska sto sam filteru reku da stane na 0 elementu, ako sam "siguran" da ce id bit unikatan i da se nece ponovit negdje dalje, iako to filter ne zna pa mi vraca array a indexOf ne moze prihvatit array
         state.items[state.items.indexOf(tmpItem)] = {
             description: action.payload.newDescription,
             id: action.payload.id
